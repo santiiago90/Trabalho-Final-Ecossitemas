@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistemas Numéricos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Sistemas Numéricos</h1>
+
+    {% if erro %}
+        <p class="erro">{{ erro }}</p>
+    {% endif %}
+
+    {% if resultado is not none %}
+        <p class="resultado">Resultado: {{ resultado }}</p>
+    {% endif %}
+
+    <section>
+        <h2>Tabela de Gray</h2>
+
+        <form method="POST">
+            <input type="hidden" name="acao" value="gray">
+
+            <label>Número de bits:</label>
+            <input type="number" name="bits" min="1" required>
+
+            <button type="submit">Gerar Tabela</button>
+        </form>
+
+        {% if tabela_gray %}
+            <table>
+                <tr>
+                    <th>Decimal</th>
+                    <th>Binário</th>
+                    <th>Gray</th>
+                </tr>
+
+                {% for decimal, binario, gray in tabela_gray %}
+                    <tr>
+                        <td>{{ decimal }}</td>
+                        <td>{{ binario }}</td>
+                        <td>{{ gray }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </section>
+
+    <section>
+        <h2>Conversões</h2>
+
+        <form method="POST">
+            <input type="hidden" name="acao" value="conversao">
+
+            <label>Tipo de conversão:</label>
+            <select name="tipo_conversao">
+                <option value="bin_dec">Binário → Decimal</option>
+                <option value="dec_bin">Decimal → Binário</option>
+                <option value="dec_hex">Decimal → Hexadecimal</option>
+                <option value="hex_dec">Hexadecimal → Decimal</option>
+                <option value="bin_hex">Binário → Hexadecimal</option>
+                <option value="hex_bin">Hexadecimal → Binário</option>
+            </select>
+
+            <label>Número:</label>
+            <input type="text" name="numero" required>
+
+            <button type="submit">Converter</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Operações</h2>
+
+        <form method="POST">
+            <input type="hidden" name="acao" value="operacao">
+
+            <label>Tipo de operação:</label>
+            <select name="tipo_operacao">
+                <option value="soma_bin">Soma Binária</option>
+                <option value="sub_bin">Subtração Binária</option>
+                <option value="mult_bin">Multiplicação Binária</option>
+                <option value="soma_hex">Soma Hexadecimal</option>
+                <option value="sub_hex">Subtração Hexadecimal</option>
+            </select>
+
+            <label>Valor A:</label>
+            <input type="text" name="valor_a" required>
+
+            <label>Valor B:</label>
+            <input type="text" name="valor_b" required>
+
+            <button type="submit">Calcular</button>
+        </form>
+    </section>
+
+</div>
+
+</body>
+</html>
