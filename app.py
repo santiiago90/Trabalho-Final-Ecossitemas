@@ -102,7 +102,7 @@ def decimal_para_hexadecimal(decimal):
 
     while decimal > 0:
         resultado = decimal_para_digito_hex(decimal % 16) + resultado
-        decimal //= 2
+        decimal //= 16
 
     return resultado
 
