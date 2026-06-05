@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for 
 
 # Cria a aplicação Flask
 app = Flask(__name__)
